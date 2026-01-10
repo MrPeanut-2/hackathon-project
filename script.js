@@ -1,121 +1,151 @@
-console.log("AI Study Assistant Loaded!");
+// script.js
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.querySelector('input');
+    const sendButton = document.querySelector('.send-button');
+    const suggestionCards = document.querySelectorAll('.suggestion-card');
 
-// Mock responses for demo (replace with real Gemini API)
-const mockResponses = {
-    quiz: `📝 **Quiz Questions Generated:**
+    // Enter to send
+    input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            const message = input.value.trim();
+            if (message) {
+                handleMessage(message);
+            }
+        }
+    });
 
-1. What is the primary function of photosynthesis?
-2. Where in the plant cell does photosynthesis occur?
-3. What important gas is released as a byproduct?
+    // Click to send
+    sendButton.addEventListener('click', function() {
+        const message = input.value.trim();
+        if (message) {
+            handleMessage(message);
+        }
+    });
 
-**Answers:**
-1. To convert sunlight into chemical energy
-2. In the chloroplasts
-3. Oxygen
-
-💡 *Tip: Try pasting your own text for personalized quizzes!*`,
-
-    summary: `📄 **Summary:**
-    
-Photosynthesis is the biological process where plants transform sunlight into usable chemical energy. This occurs specifically within chloroplasts and results in oxygen production.
-
-🎯 **Key Point:** This process is fundamental to life on Earth, providing both energy for plants and oxygen for animals.`,
-
-    explain: `💡 **Simple Explanation:**
-    
-Think of plants as nature's solar panels! They take:
-• ☀️ Sunlight (energy)
-• 💧 Water (from roots)
-• 🌬️ Carbon dioxide (from air)
-
-And turn it into:
-• 🍃 Food for themselves (glucose)
-• 🌬️ Oxygen for us to breathe
-
-It's like a tiny food factory inside every green leaf!`
-};
-
-// DOM Elements
-const inputText = document.getElementById('inputText');
-const output = document.getElementById('output');
-const loading = document.getElementById('loading');
-
-// Button Functions
-function generateQuiz() {
-    showLoading();
-    setTimeout(() => {
-        output.innerHTML = mockResponses.quiz;
-        hideLoading();
-        addGeminiCredit();
-    }, 800);
-}
-
-function summarize() {
-    showLoading();
-    setTimeout(() => {
-        output.innerHTML = mockResponses.summary;
-        hideLoading();
-        addGeminiCredit();
-    }, 600);
-}
-
-function explain() {
-    showLoading();
-    setTimeout(() => {
-        output.innerHTML = mockResponses.explain;
-        hideLoading();
-        addGeminiCredit();
-    }, 500);
-}
-
-function clearText() {
-    inputText.value = '';
-    output.innerHTML = 'Click a button above to see AI magic in action!';
-}
-
-// UI Helpers
-function showLoading() {
-    loading.style.display = 'block';
-    output.style.opacity = '0.5';
-}
-
-function hideLoading() {
-    loading.style.display = 'none';
-    output.style.opacity = '1';
-}
-
-function addGeminiCredit() {
-    output.innerHTML += '\n\n---\n*Powered by Google Gemini AI*';
-}
-
-// Real Gemini API integration (TODO: Add your API key)
-async function callGeminiAPI(prompt) {
-    // Get API key from organizers
-    const API_KEY = "YOUR_API_KEY_HERE";
-    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
-    
-    try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                contents: [{
-                    parts: [{ text: prompt }]
-                }]
-            })
+    // Suggestions
+    suggestionCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const title = this.querySelector('p:first-child').textContent;
+            const desc = this.querySelector('p:last-child').textContent;
+            input.value = `${title} - ${desc}`;
+            input.focus();
         });
-        
-        const data = await response.json();
-        return data.candidates[0].content.parts[0].text;
-    } catch (error) {
-        console.error("API Error:", error);
-        return "⚠️ Connect real Gemini API for full functionality!";
-    }
-}
+    });
 
-// Make functions available globally
-window.generateQuiz = generateQuiz;
-window.summarize = summarize;
-window.explain = explain;
-window.clearText = clearText;
-window.callGeminiAPI = callGeminiAPI;
+    function handleMessage(message) {
+        // First time? Switch to chat UI
+        if (!document.getElementById('chatHistory')) {
+            switchToChatUI();
+            createChatContainer();
+        }
+
+        // Add user message
+        addMessage(message, true);
+        input.value = '';
+
+        // Add AI response (fake for now)
+        setTimeout(() => {
+            addMessage("I've applied dark mode with larger text to the current page. The styles will persist on your next visit.", false);
+        }, 500);
+    }
+
+function switchToChatUI() {
+    console.log('Switching to chat UI...');
+    
+    // Hide these elements
+    const welcomeHeader = document.querySelector('.welcome-header');
+    const suggestedDiv = document.querySelector('.suggested-div');
+    
+    if (welcomeHeader) welcomeHeader.style.display = 'none';
+    if (suggestedDiv) suggestedDiv.style.display = 'none';
+    
+    // Adjust container position
+    const container = document.querySelector('.container');
+    container.style.marginTop = '40px'; // Less margin since input will be at bottom
+    
+    // Move the existing input container to bottom
+    moveInputToBottom();
+}
+    function createChatContainer() {
+        console.log('Creating chat container...');
+        const chatContainer = document.createElement('div');
+        chatContainer.className = 'chat-container';
+        chatContainer.innerHTML = `
+            <div class="chat-history" id="chatHistory">
+                <!-- Messages will be inserted here -->
+            </div>
+        `;
+
+        // Insert at the top of container
+        const container = document.querySelector('.container');
+        container.insertBefore(chatContainer, container.firstChild);
+    }
+
+    function addMessage(text, isUser = true) {
+        console.log('Adding message:', text, isUser);
+        const chatHistory = document.getElementById('chatHistory');
+        if (!chatHistory) return;
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
+        
+        if (isUser) {
+            messageDiv.textContent = text;
+        } else {
+            messageDiv.innerHTML = `
+                <div class="ai-header">
+                    <div class="ai-icon">AI</div>
+                    <div class="ai-name">Smart Companion</div>
+                </div>
+                <div class="ai-content">${text}</div>
+            `;
+        }
+        
+        // Add to BOTTOM (appendChild)
+        chatHistory.appendChild(messageDiv);
+        
+        // Scroll to bottom to see new message
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+function moveInputToBottom() {
+    const inputContainer = document.querySelector('.input-container');
+    const container = document.querySelector('.container');
+
+    // If already moved, do nothing
+    if (inputContainer.style.position === 'fixed') return;
+
+    // Remove from its current position in DOM
+    inputContainer.remove();
+
+    // Add to body as direct child (for fixed positioning)
+    document.body.appendChild(inputContainer);
+
+    // Style it for bottom positioning
+    inputContainer.style.position = 'fixed';
+    inputContainer.style.bottom = '20px';
+    inputContainer.style.left = '50%';
+    inputContainer.style.transform = 'translateX(-50%)';
+    inputContainer.style.width = '768px';
+    inputContainer.style.maxWidth = '90%';
+    inputContainer.style.zIndex = '1000';
+    inputContainer.style.background = 'var(--bg-primary)';
+    inputContainer.style.padding = '15px';
+    inputContainer.style.borderRadius = '25px';
+    inputContainer.style.boxShadow = '0 4px 20px rgba(0,0,0,0.15)';
+    inputContainer.style.border = 'none'; // ← REMOVE BORDER HERE
+
+    // Make the input box transparent
+    const inputBox = inputContainer.querySelector('.input-box');
+    inputBox.style.padding = '15px';
+    inputBox.style.width = '100%';
+    inputBox.style.border = 'none'; // ← REMOVE INPUT BOX BORDER
+    inputBox.style.boxShadow = 'none'; // ← REMOVE BOX SHADOW
+
+    // Add transition for smooth movement
+    inputContainer.style.transition = 'all 0.3s ease';
+
+    // Adjust container bottom padding since input is now fixed
+    container.style.paddingBottom = '100px';
+}
+});
