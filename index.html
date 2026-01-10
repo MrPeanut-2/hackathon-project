@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Study Assistant | Gemini Hackathon</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            color: #333; 
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .tagline {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            resize: vertical;
+        }
+        .buttons {
+            margin: 20px 0;
+            text-align: center;
+        }
+        button {
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            transition: all 0.2s;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #4285f4;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #888;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-graduation-cap"></i> AI Study Assistant</h1>
+        <p class="tagline">Transform any text into learning materials with Gemini AI</p>
+        
+        <textarea id="inputText" placeholder="Paste textbook content, article, or any text here...">Photosynthesis is the process by which plants convert sunlight into chemical energy. This process occurs in chloroplasts and produces oxygen as a byproduct.</textarea>
+        
+        <div class="buttons">
+            <button onclick="generateQuiz()">
+                <i class="fas fa-question-circle"></i> Generate Quiz
+            </button>
+            <button onclick="summarize()">
+                <i class="fas fa-file-alt"></i> Summarize
+            </button>
+            <button onclick="explain()">
+                <i class="fas fa-lightbulb"></i> Explain Simply
+            </button>
+            <button onclick="clearText()">
+                <i class="fas fa-times"></i> Clear
+            </button>
+        </div>
+        
+        <div class="result" id="result">
+            <h3><i class="fas fa-robot"></i> AI Results</h3>
+            <p id="output">Click a button above to see AI magic in action!</p>
+            <div id="loading" style="display: none; text-align: center; color: #4285f4;">
+                <i class="fas fa-spinner fa-spin"></i> Gemini AI is thinking...
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Built with <i class="fas fa-heart" style="color: #ff4757;"></i> using Google Gemini API | Hackathon Project</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
