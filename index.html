@@ -5,16 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Companion</title>
     <link rel="stylesheet" href="./style.css">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <div class="task-bar">
         <img src="./icons/logo.svg" alt="Logo">
         <p>AI Companion</p>
         <div class="user-controls">
-		<img  src="./icons/filter.svg" alt="Filter">
-            <img  src="./icons/person.svg" alt="Profile">
+            <img src="./icons/filter.svg" alt="Filter">
+            <img src="./icons/person.svg" alt="Profile">
         </div>
     </div>
+    
+    <!-- Hidden email form -->
+    <div id="emailForm" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+        <h3 style="margin-bottom: 20px;">Send Email</h3>
+        <input type="email" id="emailTo" placeholder="Recipient email" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+        <input type="text" id="emailSubject" placeholder="Subject" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+        <textarea id="emailBody" placeholder="Email content" style="width: 100%; height: 150px; padding: 10px; margin-bottom: 10px;"></textarea>
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button id="cancelEmail" style="padding: 8px 16px; border: 1px solid #ccc; background: white; border-radius: 5px;">Cancel</button>
+            <button id="sendEmailBtn" style="padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 5px;">Send</button>
+        </div>
+    </div>
+    
+    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;"></div>
 
     <div class="container">
         <div class="welcome-header">
@@ -26,7 +42,7 @@
 
         <div class="input-container">
             <div class="input-box">
-                <input type="text" placeholder="Type your request here...">
+                <input id="main-input" type="text" placeholder="Type your request here...">
                 <div class="lower-input-TB">
                     <div class="input-actions">
                         <button>
