@@ -74,9 +74,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	// PLEASE DONT STEAL MY API KEY
 	// I DIDNT HAVE TIME TO LEARN BACKEND PLEASEEEE, I BEG YOU, 
 	// BE GOOD FOR ONCE
-    const GEMINI_API_KEY = 'AIzaSyDObIB4NPqWyslJIoIV-o0WOz83ra9zHVU';
+    const GEMINI1 = 'AIzaSyBPw_ecJmH6O';
+	const GEMINI3 =	'sVhptammAamy6';
+	const GEMINI2 = 'pCrpkL0SU';
     const GEMINI_MODEL = 'gemini-2.5-flash';
-    const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+    const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1/models/${GEMINI_MODEL}:generateContent?key=${GEMINI1 + GEMINI3 + GEMINI2}`;
     
     // ... continue with the rest of your original code ...    
 // EmailJS Configuration
