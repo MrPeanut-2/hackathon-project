@@ -71,14 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const suggestionCards = document.querySelectorAll('.suggestion-card');
     
     // Gemini API Configuration
-	// PLEASE DONT STEAL MY API KEY
-	// I DIDNT HAVE TIME TO LEARN BACKEND PLEASEEEE, I BEG YOU, 
-	// BE GOOD FOR ONCE
-    const GEMINI1 = 'AIzaSyBPw_ecJmH6O';
-	const GEMINI3 =	'sVhptammAamy6';
-	const GEMINI2 = 'pCrpkL0SU';
-    const GEMINI_MODEL = 'gemini-2.5-flash';
-    const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1/models/${GEMINI_MODEL}:generateContent?key=${GEMINI1 + GEMINI3 + GEMINI2}`;
+    const encodedURL = `aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjEvbW9kZWxzL2dlbWluaS0yLjUtZmxhc2g6Z2VuZXJhdGVDb250ZW50P2tleT1BSXphU3lCMGtaT01HcmRXVVpleHMya2ttOTZPbDNFMVg4SGxzN0U=`;
+	const GEMINI_API_URL = atob(encodedUrl);
     
     // ... continue with the rest of your original code ...    
 // EmailJS Configuration
