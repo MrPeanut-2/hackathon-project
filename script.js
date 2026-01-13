@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const suggestionCards = document.querySelectorAll('.suggestion-card');
     
     // Gemini API Configuration
-    const encodedURL = `aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjEvbW9kZWxzL2dlbWluaS0yLjUtZmxhc2g6Z2VuZXJhdGVDb250ZW50P2tleT1BSXphU3lCMGtaT01HcmRXVVpleHMya2ttOTZPbDNFMVg4SGxzN0U=`;
+    const encodedUrl = `aHR0cHM6Ly9nZW5lcmF0aXZlbGFuZ3VhZ2UuZ29vZ2xlYXBpcy5jb20vdjEvbW9kZWxzL2dlbWluaS0yLjUtZmxhc2g6Z2VuZXJhdGVDb250ZW50P2tleT1BSXphU3lCMGtaT01HcmRXVVpleHMya2ttOTZPbDNFMVg4SGxzN0U=`;
 	const GEMINI_API_URL = atob(encodedUrl);
     
     // ... continue with the rest of your original code ...    
