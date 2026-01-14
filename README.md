@@ -2,6 +2,8 @@
 Nexus AI - Email Assistant & Chatbot
 
 https://github.com/MrPeanut-2/hackathon-project/edit/main/screenshot.png
+
+🔗Link to visit Site: https://mrpeanut-2.github.io/hackathon-project/ 
 📋 Overview
 
 Nexus AI is a modern web application that combines AI-powered email assistance with a conversational chatbot interface. It helps users draft and send emails efficiently while providing helpful responses to various queries.
@@ -32,28 +34,10 @@ Nexus AI is a modern web application that combines AI-powered email assistance w
     Font: Inter from Google Fonts
     No External Dependencies: Pure vanilla JavaScript implementation
 
-📁 Project Structure
-text
-
-AI-Companion/
-├── index.html          # Main HTML file
-├── style.css          # All CSS styles
-├── script.js          # Main JavaScript application
-├── icons/             # SVG icons directory
-│   ├── logo.svg
-│   ├── send.svg
-│   ├── add.svg
-│   ├── boxes.svg
-│   ├── voice.svg
-│   ├── filter.svg
-│   └── person.svg
-└── README.md          # This file
-
 🚀 Getting Started
 Prerequisites
     A modern web browser (Chrome, Firefox, Safari, Edge)
-    An EmailJS account (for actual email sending)
-
+    
 Installation
 
     Clone the repository
@@ -62,7 +46,7 @@ Installation
 git clone https://github.com/MrPeanut-2/hackathon-project.git
 cd hackathon-project
 
-Open the application
+How to run Nexus AI for local hosting
     Simply open index.html in your browser
     Or use a local server:
     bash
